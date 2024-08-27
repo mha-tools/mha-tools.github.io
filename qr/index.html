@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MHA Tools | QR Code Generator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <script src="qrcode.min.js"></script>
+</head>
+<body>
+<input type="text" id="text" value="https://www.mhamartin.sk" style="width:80%" autofocus="autofocus">
+<button onclick="generate()">Generate</button>
+<div id="qrcode"></div>
+<script type="text/javascript">
+  var qrcode = null;
+  function imgQR(qrCanvas, centerImage, factor) {
+    var h = qrCanvas.height;
+    var cs = h * factor;
+    var co = (h - cs) / 2;
+    var ctx = qrCanvas.getContext("2d");
+    ctx.drawImage(centerImage, 0, 0, centerImage.width, centerImage.height, co, co, cs, cs);
+  }
+  function generate() {
+    var text = document.getElementById("text").value.trim();
+    const icon = new Image();
+    icon.onload = function () {
+      this.qrcode = new QRCode(document.getElementById("qrcode"), {
+        text: text,
+        width: 256,
+        height: 256,
+        colorDark : "#1a459d",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+      });
+      imgQR(this.qrcode._oDrawing._elCanvas, this, 0.25)
+    }
+    icon.src = 'overlay.png';
+  }
+</script>
+</body>
+</html>
