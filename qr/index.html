@@ -22,19 +22,19 @@
   }
   function generate() {
     var text = document.getElementById("text").value.trim();
-    const icon = new Image();
+    const icon = new Image(512,512);
     icon.onload = function () {
       this.qrcode = new QRCode(document.getElementById("qrcode"), {
         text: text,
-        width: 256,
-        height: 256,
+        width: 512,
+        height: 512,
         colorDark : "#1a459d",
         colorLight : "#ffffff",
         correctLevel : QRCode.CorrectLevel.H
       });
       imgQR(this.qrcode._oDrawing._elCanvas, this, 0.25)
     }
-    icon.src = 'overlay.png';
+    icon.src = 'overlay.svg';
   }
 </script>
 </body>
